@@ -13,6 +13,7 @@ define('APP_ROOT', dirname(KERNEL_ROOT));
 define('INITIAL_ROOT', KERNEL_ROOT.'/initializer');
 define('LIBRARY_ROOT', KERNEL_ROOT.'/library');
 define('ADAPTER_ROOT', KERNEL_ROOT.'/adapter');
+define('ENV_ROOT',     KERNEL_ROOT.'/environment');
 
 define('CACHE_ROOT', APP_ROOT.'/cache');
 define('VIEW_ROOT', APP_ROOT.'/view');
@@ -21,12 +22,11 @@ define('LANGUAGE_ROOT', APP_ROOT.'/language');
 require_once KERNEL_ROOT."/config.php";
 require_once KERNEL_ROOT."/common.php";
 
-foreach(glob(INITIAL_ROOT."/*.php") as $initializer) {
-	if (file_exists($initializer) === true) {
-		require_once $initializer;
-	}
+$environment_path = ENV_ROOT.'/'.strtolower($config['init']['environment']).'.php';
+if (isset($config['init']['environment']) === true && file_exists($environment_path) === true) {
+	require_once $environment_path;
 }
-unset($initializer);
+unset($environment_path);
 
 define('SITE_URL', $config['init']['site_url']);
 define('STATIC_URL', SITE_URL.'/static');
@@ -63,20 +63,10 @@ if ($config['init']['show_php_error'] === false) {
 
 Session::init();
 
-if ($config['init']['use_database'] === true) {
-	Database::init($config['db']);
+foreach(glob(INITIAL_ROOT."/*.php") as $initializer) {
+	if (file_exists($initializer) === true) {
+		require_once $initializer;
+	}
 }
-
-Cache::init(array(
-	'adapter' => new File_Adapter(array(
-		'cache_root' => CACHE_ROOT.'/file_adapter'
-	))
-));
-
-View::init(array(
-	"debug" => $config['init']['show_view_error'],
-	"view_folder" => VIEW_ROOT,
-	"view_cache_folder" => CACHE_ROOT."/view",
-	"theme" => $config['init']['default_view_theme'],
-));
+unset($initializer);
 ?>
