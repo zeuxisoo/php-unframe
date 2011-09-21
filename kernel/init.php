@@ -12,6 +12,7 @@ define('APP_ROOT', dirname(KERNEL_ROOT));
 
 define('INITIAL_ROOT', KERNEL_ROOT.'/initializer');
 define('LIBRARY_ROOT', KERNEL_ROOT.'/library');
+define('ADAPTER_ROOT', KERNEL_ROOT.'/adapter');
 
 define('CACHE_ROOT', APP_ROOT.'/cache');
 define('VIEW_ROOT', APP_ROOT.'/view');
@@ -61,6 +62,10 @@ if ($config['init']['show_php_error'] === false) {
 }
 
 Session::init();
+
+if ($config['init']['use_database'] === true) {
+	Database::init($config['db']);
+}
 
 View::init(array(
 	"debug" => $config['init']['show_view_error'],
