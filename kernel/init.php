@@ -61,4 +61,11 @@ if ($config['init']['show_php_error'] === false) {
 }
 
 Session::init();
+
+View::init(array(
+	"debug" => $config['init']['show_view_error'],
+	"view_folder" => VIEW_ROOT,
+	"view_cache_folder" => CACHE_ROOT."/view",
+	"theme" => $config['init']['default_view_theme'],
+));
 ?>
