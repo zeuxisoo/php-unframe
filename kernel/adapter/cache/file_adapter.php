@@ -8,6 +8,10 @@ class File_Adapter extends Cache_Adapter {
 
 	public function __construct($settings) {
 		$this->cache_root = $settings['cache_root'];
+
+		if (file_exists($settings['cache_root']) === false) {
+			mkdir($settings['cache_root'], 0777, true);
+		}
 	}
 
 	public function add($name, $value) {
