@@ -11,7 +11,7 @@ $config = array(
 		'show_php_error'	=> true,
 		'show_view_error'	=> true,
 		'default_view_theme'=> 'default',
-		'use_database'		=> true,
+		'use_database'		=> false,
 	),
 
 	'db' => array(
