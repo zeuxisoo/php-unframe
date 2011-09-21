@@ -9,6 +9,12 @@ $config = array(
 		'timezone'			=> 'Asia/Hong_Kong',
 		'header_no_cache'	=> true,
 		'show_php_error'	=> true,
+		'show_view_error'	=> true,
+		'default_view_theme'=> 'default',
+	),
+
+	'view' => array(
+		'site_title' => 'Undefined Title',
 	),
 );
 ?>
