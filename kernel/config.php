@@ -13,6 +13,7 @@ $config = array(
 		'default_view_theme'=> 'default',
 		'use_database'		=> false,
 		'environment'		=> 'development',
+		'locale'			=> 'zh_HK',
 	),
 
 	'db' => array(
