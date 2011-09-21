@@ -25,5 +25,20 @@ abstract class Database_Adapter {
 	abstract public function fetch_one($sql, $type = '');
 	abstract public function fetch_all($sql, $type = '');
 
+	// 
+	protected function halt($message, $sql = '') {
+		$time = Util::to_date_time(time(), "Y-m-d H:i:s (D)");
+		$driver = __CLASS__;
+		$error = $this->get_error();
+		$error_no = $this->get_error_no();
+
+		// filter prefix for security issue
+		if (isset(Database::instance()->prefix)) {
+			$sql = str_replace(Database::instance()->prefix, "..", $sql);
+		}
+
+		exit(include_once View::render('error/database_adapter.html'));
+	}
+
 }
 ?>

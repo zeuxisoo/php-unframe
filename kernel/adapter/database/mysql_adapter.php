@@ -86,7 +86,7 @@ class MySQL_Adapter extends Database_Adapter {
 		$end_time = Benchmark::compared_time($start_time);
 		$this->query_time += $end_time;
 		$this->query_count++;
-		
+
 		if(isset($this->debug) && $this->debug === true) {
 			self::debug_query($sql, $end_time);
 		}
@@ -184,20 +184,6 @@ class MySQL_Adapter extends Database_Adapter {
 				'query_time' => $query_time,
 			);
 		}
-	}
-
-	public function halt($message, $sql = '') {
-		$time = Util::to_date_time(time(), "Y-m-d H:i:s (D)");
-		$driver = __CLASS__;
-		$error = $this->get_error();
-		$error_no = $this->get_error_no();
-
-		// filter prefix for security issue
-		if (isset(Database::instance()->prefix)) {
-			$sql = str_replace(Database::instance()->prefix, "..", $sql);
-		}
-
-		exit(include_once View::render('error/database_adapter.html'));
 	}
 
 }
