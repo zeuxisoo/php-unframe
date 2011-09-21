@@ -67,6 +67,12 @@ if ($config['init']['use_database'] === true) {
 	Database::init($config['db']);
 }
 
+Cache::init(array(
+	'adapter' => new File_Adapter(array(
+		'cache_root' => CACHE_ROOT.'/file_adapter'
+	))
+));
+
 View::init(array(
 	"debug" => $config['init']['show_view_error'],
 	"view_folder" => VIEW_ROOT,
