@@ -11,6 +11,19 @@ $config = array(
 		'show_php_error'	=> true,
 		'show_view_error'	=> true,
 		'default_view_theme'=> 'default',
+		'use_database'		=> true,
+	),
+
+	'db' => array(
+		'adapter'	=> "mysql",
+		'host'		=> "localhost",
+		'username'	=> "root",
+		'password'	=> "root",
+		'database'	=> "test",
+		'charset'	=> 'utf-8',
+		'port'		=> "3306",
+		'prefix'	=> "ufw_",
+		'debug'		=> true,
 	),
 
 	'view' => array(
