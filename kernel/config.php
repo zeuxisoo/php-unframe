@@ -12,6 +12,7 @@ $config = array(
 		'show_view_error'	=> true,
 		'default_view_theme'=> 'default',
 		'use_database'		=> false,
+		'environment'		=> 'development',
 	),
 
 	'db' => array(
