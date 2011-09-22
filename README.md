@@ -1,5 +1,20 @@
-Benchmark
-===
+Function
+------
+
+### Helper method
+
+import all files from kernel/library/phpmailer directory
+
+	import("kernel.library.phpmailer.*");
+
+### Alias method
+
+	t -> Locale::translate
+
+Core
+------
+
+### Benchmark
 
 	$start = Benchmark::start();
 
@@ -7,32 +22,36 @@ Benchmark
 
 	Benchmark::compared_time($start);
 
-Cache
-===
-**Create**
+### Cache
+
+Create
 	
 	Cache::add("test", "No");
 
-**Read**
+Read
 	
 	Cache::get("test");
 
-**Update**
+Update
 	
 	Cache::set("test", "Yes");
 
-**Delete**
+Delete
 
 	Cache::delete("test");
 
-Clock
-===
+### Clock
 
 	Clock::to_date_time(1234567890, 'Y-m-d H:i:s (D)');
 	Clock::human_time(Clock::to_timestamp("2011-08-21 19:36:00"))
 
-Database
-===
+### Cookie
+
+	Cookie::get("name");
+	Cookie::set("name", "zeuxis");
+	Cookie::remove("name");
+
+### Database
 
 	$db = Database::instance();
 
@@ -43,21 +62,29 @@ Database
 		$row['checkpermission'];
 	}
 
-Locale
-===
+### Email
+
+	Email::valid("test@gmail.com");
+
+	Email::send(array(
+		'to_mail' => 'test@gmail.com',
+		'subject' => 'a',
+		'message' => 'a',
+	));
+
+### Locale
 
 	Locale::translate("Name: %s, Age: %s", "Zeuxis", 18);
 
-**Name: Zeuxis, Age: 18**
+Name: Zeuxis, Age: 18
 
 	Locale::translate("Name: %{name}, Age: %{age}", array("name" => "Zeuxis", "age" => 18));
 
-**Name: Zeuxis, Age: 18.00**
+Name: Zeuxis, Age: 18.00
 
 	Locale::translate("Name: %{name}s, Age: %{age}0.2f", array("name" => "Zeuxis", "age" => 18), false);
 
-Paginate
-===
+### Paginate
 
 	Paginate::init(array(
 		'row_count' => 100,
@@ -68,14 +95,13 @@ Paginate
 
 	Paginate::build();
 
-***custom view and hide the total page***
+custom view and hide the total page
 
 	Paginate::build("default.html", false);
 
-Plugin
-===
+### Plugin
 
-**Add/Remove filter**
+Add/Remove filter
 
 	function bold($content) {
 		return "<strong>".$content."</strong>";	
@@ -97,7 +123,7 @@ Plugin
 
 	echo Plugin::apply_filter("the_content", "This is a test");
 
-**Add/Remove action**
+Add/Remove action
 
 	function show_hello() {
 		echo "Hello";
@@ -119,35 +145,31 @@ Plugin
 
 	Plugin::do_action("the_content");
 
-Request
-===
+### Request
 
 	Request::post("page");
 	Request::get("page");
 	Request::cookie("page");
 	Request::file("page");
 
-Secure
-===
+### Secure
 
 	Secure::add_slash(array(
 		'a' => "'....'",
 	));
 
-Session
-===
+### Session
 
 	Session::set("error", "Not found");
 	Session::get("error");
 
-**Get it then clean it**
+Get it then clean it
 
 	Session::get("error", true);
 
-Table
-===
+### Table
 
-**Query record by condition and limited 0~5**
+Query record by condition and limited 0~5
 
 	Table::fetch_all("email_addons", array(
 		"where" => array(
@@ -157,7 +179,7 @@ Table
 		'size' => 5,
 	));
 
-**Query one record by condition**
+Query one record by condition
 
 	Table::fetch_one("email_addons", array(
 		"where" => array(
@@ -166,20 +188,20 @@ Table
 		)
 	));
 
-**find_by_column**
+find_by_column
 
 	Table::find_by_column("email_addons", "addon_id", "checkpermissions");
 
-**find_by_[COLUMN]**
+find_by_[COLUMN]
 
 	$table = new Table("email_addons");
 	$table->find_by_addon_id("checkpermissions");
 
-**find_by_[COLUMN]** --- *(PHP 5.3)*
+find_by_[COLUMN] --- *(PHP 5.3)*
 
 	Table::find_by_addon_id("email_addons", 'checkpermissions');
 
-**Count record by different condition style**
+Count record by different condition style
 
 	Table::count("email_addons", array(
 		'addon_id' => 'checkpermissions'
@@ -203,8 +225,7 @@ Table
 		'where_logic' => 'OR'
 	));
 
-Url
-===
+### Url
 
 	Url::php_self();
 	
@@ -217,8 +238,7 @@ Url
 
 	Url::redirect('/');
 
-Util
-===
+### Util
 
 	Util::string_length_by_utf8("aaa");
 	
@@ -230,11 +250,10 @@ Util
 
 	Util::size_format(Util::folder_size('/'));
 
-View
-===
+### View
 
 	include View::display("index.html");
 
-**Auto render by current script**
+Auto render by current script
 
 	include View::display();
