@@ -217,6 +217,19 @@ Url
 
 	Url::redirect('/');
 
+Util
+===
+
+	Util::string_length_by_utf8("aaa");
+	
+	Util::substring_by_utf8("aaa", 0, 1);
+
+	Util::client_ip();
+
+	Util::random_string(8);
+
+	Util::size_format(Util::folder_size('/'));
+
 View
 ===
 
