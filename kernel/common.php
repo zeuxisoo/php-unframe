@@ -13,6 +13,29 @@ function auto_load($class_name) {
 	}
 }
 
+function import($path_string = ""){ 
+	$current_path = getcwd(); 
+	$import_path = $current_path.'/'.str_replace(".", "/", $path_string);
+
+	if(substr($import_path,-1) != "*") {
+		$import_path .= ".php";
+	}
+
+	foreach(glob($import_path) as $file_path){
+		if(is_dir($file_path) === true) {
+			$file_path = str_replace($current_path, '', $file_path);
+			import($file_path."/*");
+		}
+
+		if (substr($file_path,-4) != ".php") {
+			continue;
+		}
+
+		require_once($file_path);
+	} 
+} 
+
+// Alias method
 function t() {
 	return call_user_func_array(array("Locale", "translate"), func_get_args());
 }
