@@ -32,7 +32,15 @@ function import($path_string = ""){
 
 		require_once($file_path);
 	}
-} 
+}
+
+function format_print_r() {
+	echo "<pre>";
+	foreach(func_get_args() as $argument) {
+		print_r($argument); echo "\n";
+	}
+	echo "</pre>";
+}
 
 // Alias method
 function t() {
