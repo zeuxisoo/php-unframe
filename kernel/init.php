@@ -8,6 +8,7 @@ if (version_compare(PHP_VERSION, '6.0.0', '<') === true) {
 
 define('IN_APP', true);
 define('KERNEL_ROOT', str_replace('\\', '/', dirname(__FILE__)));
+define('WWW_ROOT', dirname(KERNEL_ROOT));
 define('APP_ROOT', dirname(KERNEL_ROOT));
 
 define('INITIAL_ROOT', KERNEL_ROOT.'/initializer');
