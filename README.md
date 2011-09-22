@@ -25,6 +25,12 @@ Cache
 
 	Cache::delete("test");
 
+Clock
+===
+
+	Clock::to_date_time(1234567890, 'Y-m-d H:i:s (D)');
+	Clock::human_time(Clock::to_timestamp("2011-08-21 19:36:00"))
+
 Database
 ===
 
@@ -120,6 +126,13 @@ Request
 	Request::get("page");
 	Request::cookie("page");
 	Request::file("page");
+
+Secure
+===
+
+	Secure::add_slash(array(
+		'a' => "'....'",
+	));
 
 Session
 ===
