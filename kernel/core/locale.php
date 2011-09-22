@@ -14,14 +14,14 @@ class Locale {
 	private static $access_string 	= "IN_APP";
 	private static $cache_file_path = "";
 	
-	public static function init($setting) {
-		self::$locale_root 		= $setting['locale_root'];
-		self::$locale_name 		= $setting['locale_name'];
+	public static function init($settings) {
+		self::$locale_root 		= $settings['locale_root'];
+		self::$locale_name 		= $settings['locale_name'];
 		self::$locale_name_root = self::$locale_root."/".self::$locale_name;
 		self::$cache_file_path 	= CACHE_ROOT."/locale/".self::$locale_name.".php";
 
-		if (isset($setting['access_string']) === true) {
-			self::$access_string = $setting['access_string'];
+		if (isset($settings['access_string']) === true) {
+			self::$access_string = $settings['access_string'];
 		}
 
 		$cache_root = dirname(self::$cache_file_path);
