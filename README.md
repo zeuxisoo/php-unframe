@@ -203,8 +203,22 @@ Table
 		'where_logic' => 'OR'
 	));
 
+Url
+===
+
+	Url::php_self();
+	
+	Url::php_uri();
+	
+	Url::build('/', array(
+		'action' => 'read',
+		'id' => 1
+	));
+
+	Url::redirect('/');
+
 View
-====
+===
 
 	include View::display("index.html");
 
