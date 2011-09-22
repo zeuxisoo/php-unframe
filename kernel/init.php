@@ -39,11 +39,11 @@ define('PLUGIN_ROOT', APP_ROOT.'/plugin');
 foreach(array('_COOKIE', '_POST', '_GET', '_FILES', '_REQUEST') as $_request) {
 	if (in_array($_request, array('_COOKIE', '_POST', '_GET')) === true) {
 	    foreach($$_request as $_key => $_value) {
-	        $_key{0} != '_' && $$_key = Util::add_slash($_value);
+	        $_key{0} != '_' && $$_key = Secure::add_slash($_value);
 	    }
 	}
 
-	$$_request = Util::add_slash($$_request);
+	$$_request = Secure::add_slash($$_request);
 }
 unset($_request, $_key, $_value, $_request);
 
