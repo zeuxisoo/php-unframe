@@ -19,6 +19,13 @@ class Paginate {
 		}
 	}
 
+	public static function offset() {
+		self::prepare();
+		self::calculate();
+		
+		return self::$offset;
+	}
+
 	private function prepare() {
 		$current_uri = isset($_SERVER['SCRIPT_URI']) === true ? $_SERVER['SCRIPT_URI'] : $_SERVER['REQUEST_URI'];
 		$query_position = strpos($current_uri, '?');
@@ -58,9 +65,6 @@ class Paginate {
 	}
 
 	public function build($view_name = 'default', $show_total = true) {
-		self::prepare();
-		self::calculate();
-
 		$from = self::$per_page * (self::$page_number - 1) + 1;
 
 		if ($from > self::$row_count) {
