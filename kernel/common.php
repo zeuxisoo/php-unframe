@@ -14,8 +14,7 @@ function auto_load($class_name) {
 }
 
 function import($path_string = ""){ 
-	$current_path = getcwd(); 
-	$import_path = $current_path.'/'.str_replace(".", "/", $path_string);
+	$import_path = WWW_ROOT.'/'.str_replace(".", "/", $path_string);
 
 	if(substr($import_path,-1) != "*") {
 		$import_path .= ".php";
@@ -23,7 +22,7 @@ function import($path_string = ""){
 
 	foreach(glob($import_path) as $file_path){
 		if(is_dir($file_path) === true) {
-			$file_path = str_replace($current_path, '', $file_path);
+			$file_path = str_replace(WWW_ROOT, '', $file_path);
 			import($file_path."/*");
 		}
 
@@ -32,7 +31,7 @@ function import($path_string = ""){
 		}
 
 		require_once($file_path);
-	} 
+	}
 } 
 
 // Alias method
