@@ -12,4 +12,8 @@ function auto_load($class_name) {
 		}
 	}
 }
+
+function t() {
+	return call_user_func_array(array("Locale", "translate"), func_get_args());
+}
 ?>
