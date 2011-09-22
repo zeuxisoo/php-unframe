@@ -32,5 +32,18 @@ $config = array(
 	'view' => array(
 		'site_title' => 'Undefined Title',
 	),
+
+	'mail' => array(
+		'smtp_enable'	=> false,
+		'smtp_secure' 	=> 'ssl',
+		'smtp_auth'   	=> true,
+		'smtp_host'  	=> 'gmail.com',
+		'smtp_user'   	=> 'user@gmail.com',
+		'smtp_pass'  	=> '',
+		'smtp_port'   	=> 465,
+		'charset'	 	=> 'utf-8',
+		'from_address'	=> 'no-reply@no-reply.com',
+		'from_username'	=> 'uMailer',
+	),
 );
 ?>
