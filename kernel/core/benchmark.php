@@ -14,7 +14,7 @@ class Benchmark {
 
 	public static function compared_time($start_time) {
 		$time_parts = self::time_parts();
-		return round(intval($time_parts[1].substr($time_parts[0], 1)) - $start_time,6);
+		return round(((double) $time_parts[1].substr($time_parts[0], 1)) - $start_time,6);
 	}
 }
 ?>
