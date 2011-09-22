@@ -14,6 +14,7 @@ $config = array(
 		'use_database'		=> false,
 		'environment'		=> 'development',
 		'locale'			=> 'zh_HK',
+		'per_page'			=> 12,
 	),
 
 	'db' => array(
