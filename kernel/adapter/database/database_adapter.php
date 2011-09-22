@@ -27,7 +27,7 @@ abstract class Database_Adapter {
 
 	// 
 	protected function halt($message, $sql = '') {
-		$time = Util::to_date_time(time(), "Y-m-d H:i:s (D)");
+		$time = Clock::to_date_time(time(), "Y-m-d H:i:s (D)");
 		$driver = __CLASS__;
 		$error = $this->get_error();
 		$error_no = $this->get_error_no();
