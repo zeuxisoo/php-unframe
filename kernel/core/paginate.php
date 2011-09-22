@@ -14,8 +14,9 @@ class Paginate {
 	private static $script = "";
 
 	public static function init($settings) {
-		self::prepare();
-		self::calculate($settings);
+		foreach($settings as $key => $value) {
+			self::$$key = $value;
+		}
 	}
 
 	private function prepare() {
@@ -34,11 +35,7 @@ class Paginate {
 		self::$script = $script;
 	}
 
-	private function calculate($settings) {
-		foreach($settings as $key => $value) {
-			self::$$key = $value;
-		}
-
+	private function calculate() {
 		self::$have_page = ceil(self::$row_count / self::$per_page);
 		
 		if (self::$have_page <= 0) {
@@ -61,6 +58,9 @@ class Paginate {
 	}
 
 	public function build($view_name = 'default', $show_total = true) {
+		self::prepare();
+		self::calculate();
+
 		$from = self::$per_page * (self::$page_number - 1) + 1;
 
 		if ($from > self::$row_count) {
