@@ -169,9 +169,10 @@ Get it then clean it
 
 ### Table
 
-Query record by condition and limited 0~5
+Query record by condition, limited 0~5 and order by addon_id
 
 	Table::fetch_all("email_addons", array(
+		"order" => "addon_id DESC",
 		"where" => array(
 			'addon_id' => 'checkpermissions'
 		),
