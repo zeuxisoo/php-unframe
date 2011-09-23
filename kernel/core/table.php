@@ -123,11 +123,15 @@ class Table {
 
 	public static function fetch_all($table_name, $condition = array()) {
 		$select= isset($condition['select']) === false ? "*" : $condition['select'];
-		$where = self::build_where($condition);
+		$where = isset($condition['where']) === true ? self::build_where($condition) : "";
 		$order = isset($condition['order']) === false ? "" : $condition['order'];
 		$offset= isset($condition['offset']) === false ? null : (int) $condition['offset'];
 		$is_one= isset($condition['one']) === false ? false : $condition['one'];
 		
+		if (stristr(strtolower($order), "order") === false) {
+			$order = "ORDER BY ".$order;
+		}
+
 		if ($is_one === true) {
 			$limit = "LIMIT 0, 1";
 		}else{
