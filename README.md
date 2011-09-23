@@ -226,6 +226,22 @@ Count record by different condition style
 		'where_logic' => 'OR'
 	));
 
+### Upload
+
+Single upload
+
+	Upload::instance(array(
+		'allow_format' => array('gif','jpg','jpeg','png'),
+		'save_root' => ATTACHMENT_ROOT
+	))->single_upload(Request::file("file"));
+	
+Multi upload
+
+	Upload::instance(array(
+		'allow_format' => array('gif','jpg','jpeg','png'),
+		'save_root' => ATTACHMENT_ROOT
+	))->multi_upload(Request::file("file"));
+
 ### Url
 
 	Url::php_self();
