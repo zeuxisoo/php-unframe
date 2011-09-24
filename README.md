@@ -7,6 +7,10 @@ import all files from kernel/library/phpmailer directory
 
 	import("kernel.library.phpmailer.*");
 
+format print_r result
+
+	format_print_r( $uploaded_info, $resized_info, $cropped_info );
+
 ### Alias method
 
 	t -> Locale::translate
@@ -117,6 +121,25 @@ Create multi image paths
 Overwrite all same name image by resized image, all file resize to 200x200
 
 	Image::instance()->multi_resize($new_uploaded_infos, 200, 200);
+
+---------
+
+Upload single file, resize image and crop image
+
+	$uploaded_info = Upload::instance(array(
+		'allow_format' => array('gif','jpg','jpeg','png'),
+		'save_root' => ATTACHMENT_ROOT
+	))->single_upload(Request::file("file"));
+
+	$resized_info = Image::instance(array(
+		'save_root' => ATTACHMENT_ROOT,
+		'prefix_name' => 'thumb_',
+	))->single_resize($uploaded_info['saved_file']['path'], 200, 200);
+
+	$cropped_info = Image::instance(array(
+		'save_root' => ATTACHMENT_ROOT,
+		'prefix_name' => 'crop_',
+	))->crop($uploaded_info['saved_file']['path'], 100, 100);
 
 ### Locale
 
