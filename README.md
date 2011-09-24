@@ -72,6 +72,52 @@ Delete
 		'message' => 'a',
 	));
 
+### Image
+
+Upload single image first
+
+	$uploaded_info = Upload::instance(array(
+		'allow_format' => array('gif','jpg','jpeg','png'),
+		'save_root' => ATTACHMENT_ROOT
+	))->single_upload(Request::file("file"));
+
+Not overwrite same name image, resized file save to save_root
+
+	Image::instance(array(
+		'save_root' =>  ATTACHMENT_ROOT.'/r',
+	))->single_resize($uploaded_info['saved_file']['path'], 200, 200);
+
+Overwrite same name image by resized image
+
+	Image::instance()->single_resize($uploaded_info['saved_file']['path'], 200, 200);
+
+Add prefix in resized file name
+
+	Image::instance(array(
+		'save_root' =>  ATTACHMENT_ROOT,
+		'prefix_name' => 'thumb_',
+	))->single_resize($uploaded_info['saved_file']['path'], 200, 200);
+
+--------
+
+Upload multi image first
+
+	$uploaded_infos = Upload::instance(array(
+		'allow_format' => array('gif','jpg','jpeg','png'),
+		'save_root' => ATTACHMENT_ROOT
+	))->multi_upload(Request::file("file"));
+
+Create multi image paths
+
+	$new_uploaded_infos = array();
+	foreach($uploaded_infos as $infos) {
+		$new_uploaded_infos[] = $infos['saved_file']['path'];
+	}
+
+Overwrite all same name image by resized image, all file resize to 200x200
+
+	Image::instance()->multi_resize($new_uploaded_infos, 200, 200);
+
 ### Locale
 
 	Locale::translate("Name: %s, Age: %s", "Zeuxis", 18);
