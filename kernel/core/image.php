@@ -4,6 +4,7 @@ if (defined('IN_APP') === false) exit('Access Dead');
 class Image {
 
 	const IS_RESIZE = 1;
+	const IS_CROP   = 2;
 
 	private static $instance = null;
 
@@ -28,13 +29,7 @@ class Image {
 	}
 	
 	public function single_resize($image_path, $width, $height) {
-		$image_size = getimagesize($image_path);
-		$current_image = array(
-			'width' => $image_size[0],
-			'height' => $image_size[1],
-			'type' => $image_size[2]
-		);
-		unset($image_size);
+		$current_image = $this->image_size($image_path);
 
 		if ($current_image['width'] < $width && $current_image['height'] < $height) {
 			$new_width = $current_image['width'];
@@ -52,63 +47,22 @@ class Image {
 		$file_extension = $this->file_extension(basename($image_path));
 
 		if (in_array(strtolower($file_extension), array('jpg', 'gif', 'png')) === true) {
-			$image = imagecreatetruecolor($new_width, $new_height);
-			$background = imagecolorallocate($image, 255, 255, 255);
-			imagefill($image, 0, 0, $background);
+			$resized_image = imagecreatetruecolor($new_width, $new_height);
+			$background = imagecolorallocate($resized_image, 255, 255, 255);
+			imagefill($resized_image, 0, 0, $background);
 			
-			$src = null;
-			if ($file_extension == 'jpg') {
-				$src = imagecreatefromjpeg($image_path);
-			}elseif ($file_extension == 'gif') {
-				$src = imagecreatefromgif($image_path);
-			}elseif($file_extension == 'png') {
-				$src = imagecreatefrompng($image_path);
-			}
+			$source_image = $this->create_source_image($image_path);
 			
-			imagecopyresampled($image, $src, 0, 0, 0, 0, $new_width, $new_height, $current_image['width'], $current_image['height']);
+			imagecopyresampled($resized_image, $source_image, 0, 0, 0, 0, $new_width, $new_height, $current_image['width'], $current_image['height']);
 
-			$save_root = trim($this->save_root);
-			$file_name = basename($image_path);
+			$save_path = $this->create_save_path($image_path);
 
-			// Add prefix name in filename
-			if (empty($this->prefix_name) === false) {
-				$file_name = $this->prefix_name.$file_name;
-			}
-
-			// Declare save_path, save to current path or different path
-			// If current path exists same name file will overwrite it
-			if (empty($this->save_root) === false) {
-				if (is_dir($this->save_root) === false && file_exists($this->save_root) == false) {
-					mkdir($this->save_root, 0777, true);
-				}
-
-				$save_path = $save_root.'/'.$file_name;
-			}else{
-				$save_path = dirname($image_path).'/'.$file_name;
-			}
-
-			if($file_extension == 'jpg') {
-				imagejpeg($image, $save_path, 100);
-			}elseif($file_extension == 'gif') {
-				imagegif($image, $save_path);
-			}elseif($file_extension == 'png') {
-				imagepng($image, $save_path, 0, null);
-			}
+			$this->create_image($resized_image, $file_extension, $save_path);
 			
-			imagedestroy($image);
-			imagedestroy($src);
+			imagedestroy($resized_image);
+			imagedestroy($source_image);
 			
-			return array(
-				'status' => true,
-				'orgin_file' => array(
-					'name' => basename($image_path),
-					'path' => $image_path,
-				),
-				'resized_file' => array(
-					'name' => basename($save_root),
-					'path' => $save_path,
-				)
-			);
+			return $this->status(self::IS_RESIZE, $image_path, $save_path);
 		}else{
 			return false;
 		}
@@ -124,6 +78,127 @@ class Image {
 		}
 
 		return $status;
+	}
+
+	public function crop($image_path, $width, $height) {
+		$current_image = $this->image_size($image_path);
+		$file_extension = $this->file_extension(basename($image_path));
+
+		if (in_array(strtolower($file_extension), array('jpg', 'gif', 'png')) === true) {
+			$source_image = $this->create_source_image($image_path);
+			$cropped_image= imagecreatetruecolor($width, $height);
+
+			$wm = $current_image['width'] / $width;
+			$hm = $current_image['height'] / $height;
+			$h_height = $height / 2;
+			$w_height = $width / 2;
+
+			if ($current_image['width'] > $current_image['height']) {
+				$adjusted_width = $current_image['width'] / $hm;
+				$half_width = $adjusted_width / 2;
+				$int_width = $half_width - $w_height;
+
+				imagecopyresampled($cropped_image, $source_image, -$int_width , 0, 0, 0, $adjusted_width, $height, $current_image['width'], $current_image['height']);
+			}else{
+				$adjusted_height = $current_image['height'] / $wm;
+				$half_height = $adjusted_height / 2;
+				$int_height = $half_height - $h_height;
+
+				imagecopyresampled($cropped_image, $source_image, 0, -$int_height, 0, 0, $width, $adjusted_height, $current_image['width'], $current_image['height']);
+			}
+
+			$save_path = $this->create_save_path($image_path);
+
+			$this->create_image($cropped_image, $file_extension, $save_path);
+
+			imagedestroy($cropped_image);
+			imagedestroy($source_image);
+
+			return $this->status(self::IS_CROP, $image_path, $save_path);
+		}else{
+			return false;
+		}
+	}
+
+	private function image_size($image_path) {
+		$image_size = getimagesize($image_path);
+		$current_image['width'] = $image_size[0];
+		$current_image['height'] = $image_size[1];
+		unset($image_size);
+
+		return $current_image;
+	}
+
+	private function create_source_image($image_path) {
+		$file_extension = $this->file_extension(basename($image_path));
+
+		$source_image = null;
+		if ($file_extension == 'jpg') {
+			$source_image = imagecreatefromjpeg($image_path);
+		}elseif ($file_extension == 'gif') {
+			$source_image = imagecreatefromgif($image_path);
+		}elseif($file_extension == 'png') {
+			$source_image = imagecreatefrompng($image_path);
+		}
+		return $source_image;
+	}
+
+	private function create_save_path($image_path) {
+		$file_name = basename($image_path);
+
+		// Add prefix name in filename
+		if (empty($this->prefix_name) === false) {
+			$file_name = $this->prefix_name.$file_name;
+		}
+
+		// Declare save_path, save to current path or different path
+		// If current path exists same name file will overwrite it
+		$this->save_root = trim($this->save_root);
+		if (empty($this->save_root) === false) {
+			if (is_dir($this->save_root) === false && file_exists($this->save_root) == false) {
+				mkdir($this->save_root, 0777, true);
+			}
+
+			$save_path = $this->save_root.'/'.$file_name;
+		}else{
+			$save_path = dirname($image_path).'/'.$file_name;
+		}
+
+		return $save_path;
+	}
+
+	private function create_image($image, $file_extension, $save_path) {
+		if($file_extension == 'jpg') {
+			imagejpeg($image, $save_path, 100);
+		}elseif($file_extension == 'gif') {
+			imagegif($image, $save_path);
+		}elseif($file_extension == 'png') {
+			imagepng($image, $save_path, 0, null);
+		}
+	}
+
+	private function status($type, $image_path, $save_path) {
+		$field_name = "";
+		switch($type) {
+			case self::IS_RESIZE:
+				$field_name = "resized_file";
+				break;
+			case self::IS_CROP:
+				$field_name = "cropped_file";
+				break;
+		}
+
+		return array(
+			'status' => true,
+			'orgin_file' => array(
+				'name' => basename($image_path),
+				'path' => $image_path,
+			),
+			$field_name => array(
+				'name' => basename($save_path),
+				'path' => $save_path,
+			)
+		);
 	}
 
 }
