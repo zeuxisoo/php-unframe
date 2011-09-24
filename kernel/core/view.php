@@ -132,9 +132,9 @@ class View {
 		self::$view_content = preg_replace($pattern, $replace, self::$view_content);
 
 		$pattern = array(
-			'#{% /foreach %}#i',
-			'#{% /for %}#i',
-			'#{% /if %}#i',
+			'#{% endforeach %}#i',
+			'#{% endfor %}#i',
+			'#{% endif %}#i',
 		);
 
 		$replace= array(

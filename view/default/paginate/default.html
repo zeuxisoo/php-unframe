@@ -1,23 +1,23 @@
 <ul class="paginator">
 	{% if $show_total === true %}
 		<li class='total'>Tol: ${self::$have_page}</li>
-	{% /if %}
+	{% endif %}
 
 	{% if self::$page_number > 1 %}
 		<li><a href="${self::build_url(self::$page_param, 1)}">{$index}</a></li>
 		<li><a href="${self::build_url(self::$page_param, self::$page_number - 1)}">{$previous}</a></li>
-	{% /if %}
+	{% endif %}
 
 	{% foreach $range $number %}
 		{% if $number == self::$page_number %}
 			<li class='current'>{$number}</li>
 		{% else %}
 			<li><a href="${self::build_url(self::$page_param, $number)}">{$number}</a></li>
-		{% /if %}
-	{% /foreach %}
+		{% endif %}
+	{% endforeach %}
 
 	{% if self::$page_number < self::$have_page %}
 		<li><a href="${self::build_url(self::$page_param, self::$page_number+1)}">{$next}</a></li>
 		<li><a href="${self::build_url(self::$page_param, self::$have_page)}">{$end}</a></li>
-	{% /if %}
+	{% endif %}
 </ul>
