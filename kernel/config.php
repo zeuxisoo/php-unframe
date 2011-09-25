@@ -15,6 +15,7 @@ $config = array(
 		'environment'		=> 'development',
 		'locale'			=> 'zh_HK',
 		'per_page'			=> 12,
+		'csrf_encrypt_key'	=> 'N._,?Yr3:VCBXpp6--ZIze9+9UcWKsej|f=U[l"/x"_!3:@E',
 	),
 
 	'db' => array(

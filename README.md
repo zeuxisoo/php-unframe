@@ -265,9 +265,32 @@ Add/Remove action
 
 ### Secure
 
+Add slashes in array value
+
 	Secure::add_slash(array(
 		'a' => "'....'",
 	));
+
+Encrypt string by slat
+
+	Secure::encrypt_text("This is a test");
+	Secure::encrypt_text("This is a test", "slat");
+
+CSRF validation
+
+	if (Request::is_post() === true) {
+		if (Secure::validate_csrf_token(Request::post("csrf_token")) === true) {
+			echo "Y";
+		}else{
+			echo "N";
+		}
+		
+		exit;
+	}
+
+	Form::open("index.php");
+	Form::hidden("csrf_token", Secure::generate_csrf_token());
+	Form::submit("Save");
 
 ### Session
 
