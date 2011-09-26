@@ -41,12 +41,15 @@ class Secure {
 
 	public static function generate_csrf_token($url = '') {
 		$i = ceil(time() / self::$csrf_token_ttl);
-		return substr(self::encrypt_text($i.$url), -22, 12);
+		$j = Util::random_string(18);
+		$k = Session::set(sprintf("%s::%s::csrf_token", __class__, $url), $j);
+		return substr(self::encrypt_text($i.$j), -22, 12);
 	}
 	
 	public static function validate_csrf_token($token, $url = '') {
 		$i = ceil(time() / self::$csrf_token_ttl);
-		return substr(self::encrypt_text($i.$url), -22, 12) == $token || substr(self::encrypt_text(($i - 1).$url), -22, 12) == $token;
+		$j = Session::get(sprintf("%s::%s::csrf_token", __class__, $url), true);
+		return substr(self::encrypt_text($i.$j), -22, 12) == $token || substr(self::encrypt_text(($i - 1).$j), -22, 12) == $token;
 	}
 
 	private static function error($type) {
