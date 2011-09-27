@@ -1,5 +1,6 @@
 .DS_Store
 .*~
+.htaccess
 attachment/*
 cache/view
 cache/file_adapter
