@@ -263,6 +263,36 @@ Add/Remove action
 	Request::cookie("page");
 	Request::file("page");
 
+### Route
+
+***Must .htaccess support***
+
+Return params table
+
+	format_print_r(Route::map("/user/:id/:name#.*#"));
+
+Using closure function show the content *PHP 5.3*
+
+	Route::map("/user/:id/:name", function($id, $name) {
+		echo $id.' - '.$name;
+	});
+
+Use custom regex rule like preg_match("/Zeuxis/", xx);
+
+	Route::map("/user/:id/:name#Zeuxis#", function($id, $name) {
+		echo $id.' - '.$name;
+	});
+
+Use class function show the content
+
+	class User {
+		function info($id, $name) {
+			echo $id.' - '.$name;
+		}
+	}
+
+	Route::map("/user/:id/:name", array(new User(), "info"));
+
 ### Secure
 
 Add slashes in array value
