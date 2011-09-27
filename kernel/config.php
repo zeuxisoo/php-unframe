@@ -12,7 +12,6 @@ $config = array(
 		'show_view_error'	=> true,
 		'default_view_theme'=> 'default',
 		'use_database'		=> false,
-		'environment'		=> 'development',
 		'locale'			=> 'zh_HK',
 		'per_page'			=> 12,
 		'csrf_encrypt_key'	=> 'N._,?Yr3:VCBXpp6--ZIze9+9UcWKsej|f=U[l"/x"_!3:@E',

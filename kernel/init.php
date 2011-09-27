@@ -23,11 +23,16 @@ define('LOCALE_ROOT', APP_ROOT.'/locale');
 require_once KERNEL_ROOT."/config.php";
 require_once KERNEL_ROOT."/common.php";
 
-$environment_path = ENV_ROOT.'/'.strtolower($config['init']['environment']).'.php';
-if (isset($config['init']['environment']) === true && file_exists($environment_path) === true) {
-	require_once $environment_path;
+$environment_file_paths = glob(CACHE_ROOT."/*.env");
+if (is_array($environment_file_paths) === true) {
+	$environment_file_path = array_shift($environment_file_paths);
+	$real_environment_path = ENV_ROOT.'/'.str_replace(".env", ".php", basename($environment_file_path));
+	if (file_exists($real_environment_path) === true && is_file($real_environment_path)) {
+		require_once $real_environment_path;
+	}
+	unset($environment_file_path, $real_environment_path);
 }
-unset($environment_path);
+unset($environment_file_paths);
 
 define('SITE_URL', $config['init']['site_url']);
 define('STATIC_URL', SITE_URL.'/static');
