@@ -5,6 +5,7 @@ a micro unframework for PHP 5 inspired by [Sinatra](http://sinatrarb.com) releas
 License
 -------
 English: http://www.opensource.org/licenses/bsd-license.php
+
 Chinese: http://zh.wikipedia.org/wiki/BSD_licenses
 
 	Copyright (c) 2011 著作權由 Zeuxis Lo 所有。著作權人保留一切權利。
@@ -27,6 +28,14 @@ Chinese: http://zh.wikipedia.org/wiki/BSD_licenses
     包括但不限於替代商品或勞務之購用、使用損失、資料損失、利益損失、業務
     中斷等等），不負任何責任，即在該種使用已獲事前告知可能會造成此類損害
     的情形下亦然。
+
+Start
+------
+- chmod 777 cache
+- touch cache/product.env
+
+	- enable production environment
+	- autoload environment/production.php after loaded config.php
 
 Function
 ------
