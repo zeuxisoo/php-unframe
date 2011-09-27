@@ -3,8 +3,6 @@ if (defined('IN_APP') === false) exit('Access Dead');
 
 class Route {
 
-	const NOT_MATCH_ROUTE = -1;
-
 	public static function request_uri() {
 		$uri = '';
 		if (empty($_SERVER['PATH_INFO']) === false) {
@@ -57,10 +55,8 @@ class Route {
 			}
 
 			if (is_callable($callback) === true) {
-				call_user_func_array($callback, array_values($params));
+				call_user_func_array($callback, array_values($params)); exit;
 			}
-		}else{
-			self::error(self::NOT_MATCH_ROUTE, $pattern_uri);
 		}
 
 		return $params;
@@ -68,16 +64,6 @@ class Route {
 
 	public static function match_path($matches) {
 		return isset($matches[2]) === true ? '('.$matches[2].')' : '([a-zA-Z0-9_\+\-%]+)';
-	}
-
-	private static function error($type, $message = "") {
-		switch($type) {
-			case self::NOT_MATCH_ROUTE:
-				$message = "Not found matched route case by ".$message;
-				break;
-		}
-
-		exit(sprintf("<strong>[Error]:</strong> %s", $message));
 	}
 }
 ?>
