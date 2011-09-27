@@ -5,3 +5,4 @@ attachment/*
 cache/view
 cache/file_adapter
 cache/locale
+kernel/config.php
