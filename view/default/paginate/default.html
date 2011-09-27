@@ -8,7 +8,7 @@
 		<li><a href="${self::build_url(self::$page_param, self::$page_number - 1)}">{$previous}</a></li>
 	{% endif %}
 
-	{% foreach $range $number %}
+	{% foreach $number in $range %}
 		{% if $number == self::$page_number %}
 			<li class='current'>{$number}</li>
 		{% else %}
