@@ -32,6 +32,7 @@ Chinese: http://zh.wikipedia.org/wiki/BSD_licenses
 Start
 ------
 - chmod 777 cache
+- mv kernel/config.php.sample kernel/config.php
 - touch cache/product.env
 
 	- enable production environment
