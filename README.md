@@ -1,6 +1,6 @@
 # unFramework for PHP 5
 
-a micro unframework for PHP 5 inspired by [Sinatra](http://sinatrarb.com) released under The BSD 2-Clause License.
+a micro unframework for PHP 5 under The BSD 2-Clause License.
 
 License
 -------
