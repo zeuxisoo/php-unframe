@@ -18,7 +18,7 @@ define('ENV_ROOT',     KERNEL_ROOT.'/environment');
 
 define('CACHE_ROOT', APP_ROOT.'/cache');
 define('VIEW_ROOT', APP_ROOT.'/view');
-define('LOCALE_ROOT', APP_ROOT.'/locale');
+define('LANGUAGE_ROOT', APP_ROOT.'/language');
 
 require_once KERNEL_ROOT."/config.php";
 require_once KERNEL_ROOT."/common.php";

@@ -1,24 +1,24 @@
 <?php
 if (defined('IN_APP') === false) exit('Access Dead');
 
-class Locale {
+class Language {
 
 	const COMPILE_ALL 	= 1;
 	const COMPILE_LIST	= 2;
 
-	const LOCALE_ROOT_NOT_FOUND = -1;
+	const LANGUAGE_ROOT_NOT_FOUND = -1;
 
-	private static $locale_root 	= "";
-	private static $locale_name 	= "";
-	private static $locale_name_root= "";
+	private static $language_root 	= "";
+	private static $language_name 	= "";
+	private static $language_name_root= "";
 	private static $access_string 	= "IN_APP";
 	private static $cache_file_path = "";
 	
 	public static function init($settings) {
-		self::$locale_root 		= $settings['locale_root'];
-		self::$locale_name 		= $settings['locale_name'];
-		self::$locale_name_root = self::$locale_root."/".self::$locale_name;
-		self::$cache_file_path 	= CACHE_ROOT."/locale/".self::$locale_name.".php";
+		self::$language_root 		= $settings['language_root'];
+		self::$language_name 		= $settings['language_name'];
+		self::$language_name_root = self::$language_root."/".self::$language_name;
+		self::$cache_file_path 	= CACHE_ROOT."/language/".self::$language_name.".php";
 
 		if (isset($settings['access_string']) === true) {
 			self::$access_string = $settings['access_string'];
@@ -36,8 +36,8 @@ class Locale {
 	public static function translate($string) {
 		include self::$cache_file_path;
 
-		$locale_table = $cache[self::$locale_name];
-		$string = isset($locale_table[$string]) === true && empty($locale_table[$string]) === false ? $locale_table[$string] : $string;
+		$language_table = $cache[self::$language_name];
+		$string = isset($language_table[$string]) === true && empty($language_table[$string]) === false ? $language_table[$string] : $string;
 
 		// Format string if have extra arguments
 		$arguments = func_get_args();
@@ -58,38 +58,38 @@ class Locale {
 	}
 
 	private static function prepare() {
-		$locale_list = glob(self::$locale_name_root."/*.php");
+		$language_list = glob(self::$language_name_root."/*.php");
 
-		if (is_dir(self::$locale_name_root) === true) {
-			// If locale cache file not exists, collect all locale file into one file
+		if (is_dir(self::$language_name_root) === true) {
+			// If language cache file not exists, collect all language file into one file
 			if (file_exists(self::$cache_file_path) === false) {
-				self::compile($locale_list, self::COMPILE_ALL);
+				self::compile($language_list, self::COMPILE_ALL);
 			}else{
-				// Search all locale file who was modifited and update it only
-				$renew_locale_list = array();
+				// Search all language file who was modifited and update it only
+				$renew_language_list = array();
 
-				foreach($locale_list as $file_path) {
+				foreach($language_list as $file_path) {
 					if (filemtime($file_path) > filemtime(self::$cache_file_path)) {
-						$renew_locale_list[] = $file_path;
+						$renew_language_list[] = $file_path;
 					}
 				}
 
-				if (empty($renew_locale_list) === false) {
-					self::compile($renew_locale_list, self::COMPILE_LIST);
+				if (empty($renew_language_list) === false) {
+					self::compile($renew_language_list, self::COMPILE_LIST);
 				}
 			}
 
 			return true;
 		}else{
-			self::error(self::LOCALE_ROOT_NOT_FOUND, self::$locale_name_root);
+			self::error(self::LANGUAGE_ROOT_NOT_FOUND, self::$language_name_root);
 		}
 	}
 
-	private static function compile($locale_file_path_list, $compile_mode) {
+	private static function compile($language_file_path_list, $compile_mode) {
 	 	$lang = $application_language = array();
 
 		// Include compile file
-		foreach($locale_file_path_list as $file_path) {
+		foreach($language_file_path_list as $file_path) {
 			include $file_path;
 
 			switch($compile_mode) {
@@ -98,20 +98,20 @@ class Locale {
 					break;
 				case self::COMPILE_LIST;
 					include_once self::$cache_file_path;
-					$cache[self::$locale_name] = array_merge($cache[self::$locale_name], $lang);
+					$cache[self::$language_name] = array_merge($cache[self::$language_name], $lang);
 					break;
 			}
 		}
 
-		// Set application locale content to merged new locale when compile mode is renew
+		// Set application language content to merged new language when compile mode is renew
 		if ($compile_mode === self::COMPILE_LIST) {
-			$application_language = $cache[self::$locale_name];
+			$application_language = $cache[self::$language_name];
 		}
 
-		// Make locale cache
+		// Make language cache
 		file_put_contents(
 			self::$cache_file_path,
-			"<?php if(!defined('".self::$access_string."')) exit('Access Dead');\n\$cache['".self::$locale_name."'] = ".var_export($application_language, true).";\n".'?>'
+			"<?php if(!defined('".self::$access_string."')) exit('Access Dead');\n\$cache['".self::$language_name."'] = ".var_export($application_language, true).";\n".'?>'
 		);
 	}
 
@@ -119,8 +119,8 @@ class Locale {
 		$label = "";
 
 		switch($type) {
-			case self::LOCALE_ROOT_NOT_FOUND;
-				$label = "Not found locale folder";
+			case self::LANGUAGE_ROOT_NOT_FOUND;
+				$label = "Not found language folder";
 				break;
 		}
 

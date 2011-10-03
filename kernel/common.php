@@ -44,6 +44,6 @@ function format_print_r() {
 
 // Alias method
 function t() {
-	return call_user_func_array(array("Locale", "translate"), func_get_args());
+	return call_user_func_array(array("Language", "translate"), func_get_args());
 }
 ?>

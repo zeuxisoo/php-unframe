@@ -53,7 +53,7 @@ format print_r result
 
 ### Alias method
 
-	t -> Locale::translate
+	t -> Language::translate
 
 Core
 ------
@@ -223,17 +223,17 @@ Upload single file, resize image and crop image
 		'prefix_name' => 'crop_',
 	))->crop($uploaded_info['saved_file']['path'], 100, 100);
 
-### Locale
+### Language
 
-	Locale::translate("Name: %s, Age: %s", "Zeuxis", 18);
+	Language::translate("Name: %s, Age: %s", "Zeuxis", 18);
 
 Name: Zeuxis, Age: 18
 
-	Locale::translate("Name: %{name}, Age: %{age}", array("name" => "Zeuxis", "age" => 18));
+	Language::translate("Name: %{name}, Age: %{age}", array("name" => "Zeuxis", "age" => 18));
 
 Name: Zeuxis, Age: 18.00
 
-	Locale::translate("Name: %{name}s, Age: %{age}0.2f", array("name" => "Zeuxis", "age" => 18), false);
+	Language::translate("Name: %{name}s, Age: %{age}0.2f", array("name" => "Zeuxis", "age" => 18), false);
 
 ### Paginate
 
