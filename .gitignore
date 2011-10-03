@@ -5,5 +5,5 @@
 attachment/*
 cache/view
 cache/file_adapter
-cache/locale
+cache/language
 kernel/config.php
