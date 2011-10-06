@@ -3,6 +3,12 @@ if (defined('IN_APP') === false) exit('Access Dead');
 
 class Route {
 
+	private static $params = array();
+
+	public static function params() {
+		return self::$params;
+	}
+
 	public static function request_uri() {
 		$uri = '';
 		if (empty($_SERVER['PATH_INFO']) === false) {
@@ -43,26 +49,26 @@ class Route {
 		$match_path  = preg_replace_callback($match_words, array(__class__, "match_path"), $pattern_uri);
 		$match_path .= $strict === true ? '' : '/?';
 
-		$match_path  = $sensitive === true ? "@".$match_path."@" : "@".$match_path."@i";
+		$match_path  = $sensitive === true ? "@^".$match_path."$@" : "@^".$match_path."$@i";
 
 		// Fill params
-		$params = array();
+		self::$params = array();
 		if (preg_match($match_path, $request_uri, $values) == true) {
 			array_shift($values);
 
 			foreach($names as $index => $name) {
-				$params[$name] = rawurldecode($values[$index]);
+				self::$params[$name] = rawurldecode($values[$index]);
 			}
 
 			if (is_callable($callback) === true) {
-				call_user_func_array($callback, array_values($params)); exit;
+				call_user_func_array($callback, array_values(self::$params)); exit;
 			}
 		}
 
-		return $params;
+		return self::$params;
 	}
 
-	public static function match_path($matches) {
+	private static function match_path($matches) {
 		return isset($matches[2]) === true ? '('.$matches[2].')' : '([a-zA-Z0-9_\+\-%]+)';
 	}
 }
