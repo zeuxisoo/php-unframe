@@ -333,6 +333,36 @@ Use class function show the content
 
 	Route::map("/user/:id/:name", array(new User(), "info"));
 
+### Router
+
+Add auto route in index.php for "/:controller", "/:controller/:action" and "/:controller/:action/:id"
+
+	require_once dirname(__FILE__).'/kernel/init.php';
+	Router::instance()->route();
+
+Enable and Create auto load folder in kernel/config.php for load controller and model
+
+	'auto_load_folders' => array(
+		APP_ROOT.'/controller',
+		APP_ROOT.'/model',
+	)
+
+Controller named "[NAME]_controller.php" in APP_ROOT.'/controller' folder
+
+	class Person_Controller {
+		public function index() {
+			echo __CLASS__."::".__FUNCTION__;
+		}
+
+		public function create() {
+			echo __CLASS__."::".__FUNCTION__;
+			echo "<br />";
+
+			// Three params key will auto added
+			echo $this->params['controller']."/".$this->params['action']."/".$this->params['id'];
+		}
+	}
+
 ### Secure
 
 Add slashes in array value
