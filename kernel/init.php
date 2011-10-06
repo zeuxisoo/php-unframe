@@ -16,9 +16,9 @@ define('LIBRARY_ROOT', KERNEL_ROOT.'/library');
 define('ADAPTER_ROOT', KERNEL_ROOT.'/adapter');
 define('ENV_ROOT',     KERNEL_ROOT.'/environment');
 
-define('CACHE_ROOT', APP_ROOT.'/cache');
-define('VIEW_ROOT', APP_ROOT.'/view');
-define('LANGUAGE_ROOT', APP_ROOT.'/language');
+if (defined('CACHE_ROOT') === false) define('CACHE_ROOT', APP_ROOT.'/cache');
+if (defined('VIEW_ROOT') === false) define('VIEW_ROOT', APP_ROOT.'/view');
+if (defined('LANGUAGE_ROOT') === false) define('LANGUAGE_ROOT', APP_ROOT.'/language');
 
 require_once KERNEL_ROOT."/config.php";
 require_once KERNEL_ROOT."/common.php";
@@ -34,13 +34,13 @@ if (is_array($environment_file_paths) === true) {
 }
 unset($environment_file_paths);
 
-define('SITE_URL', $config['init']['site_url']);
-define('STATIC_URL', SITE_URL.'/static');
-define('ATTACHMENT_ROOT', APP_ROOT.'/'.$config['init']['attachment_folder']);
-define('ATTACHMENT_URL', SITE_URL.'/'.$config['init']['attachment_folder']);
-define('ADMIN_ROOT', APP_ROOT.'/'.$config['init']['admin_folder']);
-define('ADMIN_URL', SITE_URL.'/'.$config['init']['admin_folder']);
-define('PLUGIN_ROOT', APP_ROOT.'/plugin');
+if (defined('SITE_URL') === false) define('SITE_URL', $config['init']['site_url']);
+if (defined('STATIC_URL') === false) define('STATIC_URL', SITE_URL.'/static');
+if (defined('ATTACHMENT_ROOT') === false) define('ATTACHMENT_ROOT', APP_ROOT.'/'.$config['init']['attachment_folder']);
+if (defined('ATTACHMENT_URL') === false) define('ATTACHMENT_URL', SITE_URL.'/'.$config['init']['attachment_folder']);
+if (defined('ADMIN_ROOT') === false) define('ADMIN_ROOT', APP_ROOT.'/'.$config['init']['admin_folder']);
+if (defined('ADMIN_URL') === false) define('ADMIN_URL', SITE_URL.'/'.$config['init']['admin_folder']);
+if (defined('PLUGIN_ROOT') === false) define('PLUGIN_ROOT', APP_ROOT.'/plugin');
 
 foreach(array('_COOKIE', '_POST', '_GET', '_FILES', '_REQUEST') as $_request) {
 	if (in_array($_request, array('_COOKIE', '_POST', '_GET')) === true) {
