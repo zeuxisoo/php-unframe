@@ -6,4 +6,6 @@ attachment/*
 cache/view
 cache/file_adapter
 cache/language
+controller/*
+model/*
 kernel/config.php
