@@ -38,6 +38,35 @@ Start
 	- enable production environment
 	- autoload environment/production.php after loaded config.php
 
+Remark
+------
+
+- $config['init']['auto_load_folders'] supported auto load nested directories files
+
+	# controller/admin/person_controller.php
+	# using **new Admin_Person_Controller()**
+	<?php
+	class Admin_Person_Controller {
+		public function __construct() {
+			echo __CLASS__;
+		}
+	}
+	?>
+
+	# controller/person_controller.php
+	# using **new Person_Controller()**
+	<?php
+	class Person_Controller {
+		public function index() {
+			echo __CLASS__."::".__FUNCTION__;
+		}
+
+		public function create() {
+			echo __CLASS__."::".__FUNCTION__;
+		}
+	}
+	?>
+
 Function
 ------
 
@@ -49,7 +78,7 @@ import all files from kernel/library/phpmailer directory
 
 format print_r result
 
-	format_print_r( $uploaded_info, $resized_info, $cropped_info );
+	p( $uploaded_info, $resized_info, $cropped_info );
 
 ### Alias method
 

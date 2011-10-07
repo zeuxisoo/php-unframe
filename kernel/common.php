@@ -15,11 +15,17 @@ function auto_load($class_name) {
 	}
 
 	if (is_array($config['init']['auto_load_folders']) === true && empty($config['init']['auto_load_folders']) === false) {
-		foreach($config['init']['auto_load_folders'] as $folder) {
-			$file_path = $folder.'/'.strtolower($class_name).'.php';
+		$directories = $config['init']['auto_load_folders'];
+
+		while (sizeof($directories)) {
+			$directory = array_pop($directories);
 			
-			if (file_exists($file_path) === true && is_file($file_path) === true) {
-				require_once $file_path;
+			foreach(glob($directory."/*") as $file_path) {
+				if (is_dir($file_path) === true) {
+					array_push($directories, $file_path);
+				}elseif (is_file($file_path) === true && preg_match("/\.(php|inc)$/", $file_path) == true) {
+					require_once $file_path;
+				}
 			}
 		}
 	}
@@ -46,7 +52,7 @@ function import($path_string = ""){
 	}
 }
 
-function format_print_r() {
+function p() {
 	echo "<pre>";
 	foreach(func_get_args() as $argument) {
 		print_r($argument); echo "\n";
