@@ -338,7 +338,7 @@ Add/Remove action
 
 Return params table
 
-	format_print_r(Route::map("/user/:id/:name#.*#"));
+	p(Route::map("/user/:id/:name#.*#"));
 
 Using closure function show the content *PHP 5.3*
 
