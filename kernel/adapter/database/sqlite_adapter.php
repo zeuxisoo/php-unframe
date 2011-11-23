@@ -14,8 +14,8 @@ class SQLite_Adapter extends Database_Adapter {
 
 	public function __construct($config) {
 		$this->configs = $config;
-			
-		if ($config['driver'][0] != '/') {
+
+		if ($config['host'][0] != '/') {
 			$sqlite_root = WWW_ROOT."/".$config['host'];
 		}else{
 			$sqlite_root = $config['host'];
