@@ -1,7 +1,7 @@
 <?php
 if (defined('IN_APP') === false) exit('Access Dead');
 
-class SQLite_Adpater {
+class SQLite_Adapter extends Database_Adapter {
 	
 	private static $instance= null;
 	public $statement		= null;
