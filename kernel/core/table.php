@@ -57,7 +57,7 @@ class Table {
 
 			$escaped_values = array();
 			foreach($this->column_values as $name => $value) {
-				$escaped_values[$name] = self::$db->escape($this->column_values[$name]);
+				$escaped_values[$name] = self::escape($this->column_values[$name]);
 			}
 
 			// Update | Create
@@ -120,7 +120,13 @@ class Table {
 	}
 
 	public static function escape($value) {
-		return self::$db->escape($value);
+		$value = self::$db->escape($value);
+
+		if (self::$db instanceof SQLite_Adapter && preg_match("/^'(.*)'$/", $value, $matches) == true) {
+			$value = $matches[1];
+		}
+
+		return $value;
 	}
 
 	public static function fetch_all($table_name, $condition = array()) {
