@@ -2,7 +2,7 @@
 if (defined('IN_APP') === false) exit('Access Dead');
 
 class Table {
-	
+
 	private static $db = null;
 	private $table_name		= "";
 	private $column_values	= array();
@@ -50,7 +50,7 @@ class Table {
 		self::$db = $settings['db'];
 	}
 
-	public function save() {		
+	public function save() {
 		if (empty($this->column_values) === false) {
 
 			$escaped_values = array();
@@ -110,7 +110,7 @@ class Table {
 	public static function delete($table_name, $condition = array()) {
 		$where = self::build_where($condition);
 
-		return self::$db->update("DELETE FROM ".self::table($table_name)." $where");
+		return self::$db->update("DELETE FROM ".self::prefix($table_name)." $where");
 	}
 
 	public static function last_insert_id() {
@@ -127,7 +127,7 @@ class Table {
 		$order = isset($condition['order']) === false ? "" : $condition['order'];
 		$offset= isset($condition['offset']) === false ? null : (int) $condition['offset'];
 		$is_one= isset($condition['one']) === false ? false : $condition['one'];
-		
+
 		if (stristr(strtolower($order), "order") === false) {
 			$order = "ORDER BY ".$order;
 		}
@@ -163,7 +163,7 @@ class Table {
 	public static function find_by_column($table_name, $column_name, $column_value) {
 		return self::fetch_all($table_name, array(
 			$column_name => $column_value,
-		));	
+		));
 	}
 
 	private static function build_where($condition) {
