@@ -2,7 +2,7 @@
 if (defined('IN_APP') === false) exit('Access Dead');
 
 class SQLite_Adapter extends Database_Adapter {
-	
+
 	private static $instance= null;
 	public $statement		= null;
 	public $query_count		= 0;		// Database query count
@@ -20,18 +20,18 @@ class SQLite_Adapter extends Database_Adapter {
 		}else{
 			$sqlite_root = $config['host'];
 		}
-		
+
 		if (file_exists($sqlite_root) === false || is_file($sqlite_root) === false) {
 			$this->halt("Can not found sqlite file");
 		}else{
 			$this->pdo = new PDO('sqlite:'.$sqlite_root);
 			$this->pdo->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
-			
+
 			$this->connect(null, null, null, null, null, null, null);
-			
+
 			self::$instance = $this->pdo;
 		}
-		
+
 		return $this->pdo;
 	}
 
@@ -42,52 +42,52 @@ class SQLite_Adapter extends Database_Adapter {
 			$this->halt('Can not connect DataBase Server or DataBase.');
 		}
 	}
-	
+
 	public function query($sql, $type = '') {
 		try {
 			$start_time = Benchmark::start();
-		
+
 			$this->statement = $this->pdo->prepare($sql);
 			$this->statement->execute();
-			
-			$end_time = Benchmark::process_time($start_time);
-		
+
+			$end_time = Benchmark::compared_time($start_time);
+
 			if(isset($this->debug) && $this->debug === true) {
 				$this->debug_query($sql, $end_time);
 			}
-			
+
 			return $this->statement;
 		}catch(PDOException $e) {
 			$this->halt($e->getMessage(), $sql);
 		}
 	}
-	
+
 	public function update($sql, $type = '') {
 		try {
 			$start_time = Benchmark::start();
-		
+
 			$affected_row = $this->pdo->exec($sql);
-			
-			$end_time = Benchmark::process_time($start_time);
-		
+
+			$end_time = Benchmark::compared_time($start_time);
+
 			if(isset($this->debug) && $this->debug === true) {
 				$this->debug_query($sql, $end_time);
 			}
-			
+
 			return $affected_row;
 		}catch(PDOException $e) {
 			$this->halt($e->getMessage(), $sql);
 		}
 	}
-	
+
 	public function close() {
 		$this->pdo = null;
 	}
-	
+
 	public function set_debug($status = false) {
 		$this->debug = $status;
 	}
-	
+
 	public function get_debug_log() {
 		return $this->debug_log;
 	}
@@ -103,7 +103,7 @@ class SQLite_Adapter extends Database_Adapter {
 		}
 		return "";
 	}
-	
+
 	public function get_error_no() {
 		if ($this->statement) {
 			return $this->statement->errorCode();
@@ -120,7 +120,7 @@ class SQLite_Adapter extends Database_Adapter {
 		}
 		return $this->pdo->quote($data);
 	}
-	
+
 	public function get_last_insert_id() {
 		return $this->pdo->lastInsertId();
 	}
@@ -128,7 +128,7 @@ class SQLite_Adapter extends Database_Adapter {
 	public function fetch_array($sql, $type = '') {
 		return $this->statement->fetch(empty($type) === true ? PDO::FETCH_ASSOC : $type, PDO::FETCH_ORI_NEXT);
 	}
-	
+
 	public function result($sql, $column_number) {
 		if ($sql) {
 			if ($sql instanceof PDOStatement) {
@@ -136,38 +136,38 @@ class SQLite_Adapter extends Database_Adapter {
 			}else{
 				$statement = $this->query($sql);
 			}
-			
+
 			$result = $statement->fetchColumn($column_number);
 		} elseif ($this->statement) {
 			$result = $this->statement->rowCount();
 		} else {
 			$result = 0;
 		}
-		
+
 		return $result;
 	}
-	
+
 	public function free_result($query) {
 		if ($this->statement) {
 			$this->statement = null;
 		}
-		
+
 		$query = null;
 	}
 
 	// extra method
-	public function fetch_one($sql, $type = '') {		
+	public function fetch_one($sql, $type = '') {
 		$statement = $this->query($sql);
 		$return = $statement->fetch(empty($type) === true ? PDO::FETCH_ASSOC : $type);
 		return $return;
 	}
-	
+
 	public function fetch_all($sql, $type = '') {
 		$statement = $this->query($sql);
 		$return = $statement->fetchAll(empty($type) === true ? PDO::FETCH_ASSOC : $type);
 		return $return;
 	}
-	
+
 	//
 	public function debug_query($sql, $query_time) {
 		if(preg_match("#^select#i", strtolower(trim($sql)))) {
