@@ -131,7 +131,7 @@ class Table {
 
 	public static function fetch_all($table_name, $condition = array()) {
 		$select= isset($condition['select']) === false ? "*" : $condition['select'];
-		$where = isset($condition['where']) === true ? self::build_where($condition) : "";
+		$where = isset($condition['where']) === true ? self::build_where($condition['where']) : "";
 		$order = isset($condition['order']) === false ? "" : $condition['order'];
 		$offset= isset($condition['offset']) === false ? null : (int) $condition['offset'];
 		$is_one= isset($condition['one']) === false ? false : $condition['one'];
