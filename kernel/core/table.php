@@ -34,7 +34,9 @@ class Table {
 	public static function __callStatic($name, $arguments) {
 		if (preg_match("/^find_by_([_a-zA-Z]\w*)$/", $name, $match) == true) {
 			return self::fetch_all($arguments[0], array(
-				$match[1] => $arguments[1],
+				'where' => array(
+					$match[1] => $arguments[1],
+				)
 			));
 		}else{
 			return array();
@@ -162,7 +164,9 @@ class Table {
 
 	public static function find_by_column($table_name, $column_name, $column_value) {
 		return self::fetch_all($table_name, array(
-			$column_name => $column_value,
+			'where' => array(
+				$column_name => $column_value,
+			)
 		));
 	}
 
