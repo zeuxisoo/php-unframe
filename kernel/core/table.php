@@ -136,7 +136,7 @@ class Table {
 		$offset= isset($condition['offset']) === false ? null : (int) $condition['offset'];
 		$is_one= isset($condition['one']) === false ? false : $condition['one'];
 
-		if (stristr(strtolower($order), "order") === false) {
+		if (empty($order) === false && stristr(strtolower($order), "order") === false) {
 			$order = "ORDER BY ".$order;
 		}
 
