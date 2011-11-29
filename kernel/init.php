@@ -75,4 +75,9 @@ foreach(glob(INITIAL_ROOT."/*.php") as $initializer) {
 	}
 }
 unset($initializer);
+
+$loaded_file_path = KERNEL_ROOT.'/loaded.php';
+if (file_exists($loaded_file_path) === true) {
+	require_once $loaded_file_path;
+}
 ?>
