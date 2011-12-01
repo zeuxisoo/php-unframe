@@ -9,16 +9,16 @@ English: http://www.opensource.org/licenses/bsd-license.php
 Chinese: http://zh.wikipedia.org/wiki/BSD_licenses
 
 	Copyright (c) 2011 著作權由 Zeuxis Lo 所有。著作權人保留一切權利。
-
+    
     這份授權條款，在使用者符合以下二條件的情形下，授予使用者使用及再散播本
     套裝軟體原始碼及二進位可執行形式的權利，無論此包裝是否經改作皆然：
-
+    
     * 對於本軟體原始程式碼的再散播，必須保留上述的版權宣告、此二條件表列，以
       及下述的免責聲明。
     * 對於本套件二進位可執行形式的再散播，必須連帶以檔案以及／或者其他附
       於散播包裝中的媒介方式，重制上述之版權宣告、此二條件表列，以及下述
       的免責聲明。
-
+    
     免責聲明：本軟體是由著作權人及本軟體之貢獻者以現狀（"as is"）提供，
     本套裝軟體包裝不負任何明示或默示之擔保責任，包括但不限於就適售性以及
     特定目的的適用性為默示性擔保。著作權人及本軟體之貢獻者，無論任何條件、
@@ -98,15 +98,15 @@ Core
 ### Cache
 
 Create
-
+	
 	Cache::add("test", "No");
 
 Read
-
+	
 	Cache::get("test");
 
 Update
-
+	
 	Cache::set("test", "Yes");
 
 Delete
@@ -158,7 +158,7 @@ Form::hidden("id", "1");
 Form::input("username", "Name");
 
 	<input type="text" name="username" value="Name" />
-
+	
 Form::password("password", "1234");
 
 	<input type="password" name="password" value="1234" />
@@ -284,15 +284,15 @@ custom view and hide the total page
 Add/Remove filter
 
 	function bold($content) {
-		return "<strong>".$content."</strong>";
+		return "<strong>".$content."</strong>";	
 	}
 
 	function italic($content) {
-		return "<span style='font-style: italic'>".$content."</span>";
+		return "<span style='font-style: italic'>".$content."</span>";	
 	}
 
 	function underline($content) {
-		return "<span style='text-decoration: underline'>".$content."</span>";
+		return "<span style='text-decoration: underline'>".$content."</span>";		
 	}
 
 	Plugin::add_filter("the_content", "bold");
@@ -413,7 +413,7 @@ CSRF validation
 		}else{
 			echo "N";
 		}
-
+		
 		exit;
 	}
 
@@ -497,7 +497,7 @@ Single upload
 		'allow_format' => array('gif','jpg','jpeg','png'),
 		'save_root' => ATTACHMENT_ROOT
 	))->single_upload(Request::file("file"));
-
+	
 Multi upload
 
 	Upload::instance(array(
@@ -508,9 +508,9 @@ Multi upload
 ### Url
 
 	Url::php_self();
-
+	
 	Url::php_uri();
-
+	
 	Url::build('/', array(
 		'action' => 'read',
 		'id' => 1
@@ -518,12 +518,10 @@ Multi upload
 
 	Url::redirect('/');
 
-	Url::schema(); // Return url path
-
 ### Util
 
 	Util::string_length_by_utf8("aaa");
-
+	
 	Util::substring_by_utf8("aaa", 0, 1);
 
 	Util::client_ip();
