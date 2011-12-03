@@ -122,7 +122,7 @@ class Plugin {
 			$arguments[] = func_get_arg($i);
 		}
 
-		if (isset(self::$sorted_action[$tag]) === false) {
+		if (isset(self::$sorted_action[$tag]) === true) {
 			ksort(self::$plugin_action[$tag]);
 			self::$sorted_action[$tag] = true;
 		}
