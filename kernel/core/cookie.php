@@ -12,7 +12,7 @@ class Cookie {
 	}
 
 	public static function remove($name) {
-		self::add($name, '', -84600);
+		self::set($name, '', -84600);
 
 		if (isset($_COOKIE[$name])) {
 			unset($_COOKIE[$name]);
