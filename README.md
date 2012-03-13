@@ -1,6 +1,6 @@
-# unFramework for PHP 5
+# unFrame
 
-a micro unframework for PHP 5 under The BSD 2-Clause License.
+a micro unframe for PHP 5 under The BSD 2-Clause License.
 
 License
 -------
@@ -8,7 +8,7 @@ English: http://www.opensource.org/licenses/bsd-license.php
 
 Chinese: http://zh.wikipedia.org/wiki/BSD_licenses
 
-	Copyright (c) 2011 著作權由 Zeuxis Lo 所有。著作權人保留一切權利。
+	Copyright (c) 2012 著作權由 Zeuxis Lo 所有。著作權人保留一切權利。
     
     這份授權條款，在使用者符合以下二條件的情形下，授予使用者使用及再散播本
     套裝軟體原始碼及二進位可執行形式的權利，無論此包裝是否經改作皆然：
