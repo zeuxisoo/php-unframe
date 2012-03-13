@@ -41,31 +41,33 @@ Start
 Remark
 ------
 
-- $config['init']['auto_load_folders'] supported auto load nested directories files
+`$config['init']['auto_load_folders']` supported auto load nested directories files
 
-	# controller/admin/person_controller.php
-	# using **new Admin_Person_Controller()**
-	<?php
-	class Admin_Person_Controller {
-		public function __construct() {
-			echo __CLASS__;
+		# controller/admin/person_controller.php
+		# using **new Admin_Person_Controller()**
+		<?php
+		class Admin_Person_Controller {
+			public function __construct() {
+				echo __CLASS__;
+			}
 		}
-	}
-	?>
+		?>
 
-	# controller/person_controller.php
-	# using **new Person_Controller()**
-	<?php
-	class Person_Controller {
-		public function index() {
-			echo __CLASS__."::".__FUNCTION__;
-		}
+>
 
-		public function create() {
-			echo __CLASS__."::".__FUNCTION__;
+		# controller/person_controller.php
+		# using **new Person_Controller()**
+		<?php
+		class Person_Controller {
+			public function index() {
+				echo __CLASS__."::".__FUNCTION__;
+			}
+	
+			public function create() {
+				echo __CLASS__."::".__FUNCTION__;
+			}
 		}
-	}
-	?>
+		?>
 
 Function
 ------
