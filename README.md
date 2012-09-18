@@ -149,25 +149,41 @@ Delete
 
 ### Form
 
-Form::open("index.php", array("multipart" => true, "name" => 'test'));
+Form::open
+
+	Form::open("index.php", array("multipart" => true, "name" => 'test'));
 
 	<form action="index.php" method="post" name="test" enctype="multipart/form-data">
 
-Form::hidden("id", "1");
+Form::hidden
+
+	Form::hidden("id", "1");
 
 	<input type="hidden" name="id" value="1" />
 
-Form::input("username", "Name");
+Form::input
+
+	Form::input("username", "Name");
 
 	<input type="text" name="username" value="Name" />
 	
-Form::password("password", "1234");
+Form::password
+	
+	Form::password("password", "1234");
 
 	<input type="password" name="password" value="1234" />
 
+Form::select && Form::select
 
-$options = Form::option(array('1' => 'boy', '2' => 'girl'), 1);
-Form::select("gender", $options, array('first_option' => '', 'multiple' => 'multiple', 'disabled' => 'disabled'));
+	$options = Form::option(array('1' => 'boy', '2' => 'girl'), 1);
+	Form::select(
+		"gender", 
+		$options, 
+		array(
+		'first_option' => '', 
+		'multiple' => 'multiple', 
+		'disabled' => 'disabled'
+	));
 
 	<select multiple="multiple" disabled="disabled">
 	<option value=""></option>
@@ -175,17 +191,23 @@ Form::select("gender", $options, array('first_option' => '', 'multiple' => 'mult
 	<option value="2">girl</option>
 	</select>
 
-Form::checkbox("Name", "Zeuxis", false); echo " Zeuxis";
-Form::checkbox("Name", "Noell", true); echo " Noell";
+Form::checkbox
+
+	Form::checkbox("Name", "Zeuxis", false); echo " Zeuxis";
+	Form::checkbox("Name", "Noell", true); echo " Noell";
 
 	<input type="checkbox" name="Name" value="Zeuxis" />
 	<input type="checkbox" name="Name" value="Noell" checked="checked" />
 
-Form::textarea("content", "用戶名");
+Form::textarea
+	
+	Form::textarea("content", "用戶名");
 
 	<textarea name="content" rows="5">用戶名</textarea>
 
-Form::submit("Save");
+Form::submit
+
+	Form::submit("Save");
 
 	<input type="submit" name="commit" value="Save" />
 
