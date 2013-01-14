@@ -9,15 +9,15 @@ class MySQL_Adapter extends Database_Adapter {
 	public $update_count	= 0;
 	public $last_insert_id 	= 0;
 	public $debug 			= false;
-	
+
 	public function __construct($config) {
 		$this->connect(
-			$config['host'], 
-			$config['username'], 
-			$config['password'], 
-			$config['database'], 
-			$config['prefix'], 
-			$config['charset'], 
+			$config['host'],
+			$config['username'],
+			$config['password'],
+			$config['database'],
+			$config['prefix'],
+			$config['charset'],
 			$config['port']
 		);
 	}
@@ -30,15 +30,13 @@ class MySQL_Adapter extends Database_Adapter {
 		if(mysql_get_server_info() > '4.1') {
 			$charset = str_replace('-', '', $charset);
 
-			$setup  = "SET NAMES '".$charset."',";
-			$setup .= "SET CHARACTER_SET_CLIENT = '".$charset."';";
-			$setup .= "SET CHARACTER_SET_RESULTS = '".$charset."';";
-
-			if(mysql_get_server_info() > '5.0.1'){
-				$setup .= "SET sql_mode=''";
+			if (empty($charset) === false) {
+				mysql_query("SET CHARACTER_SET_CONNECTION=$charset, CHARACTER_SET_RESULTS=$charset, character_set_client = binary");
 			}
 
-			mysql_query($setup);
+			if(mysql_get_server_info() > '5.0.1'){
+				mysql_query("SET sql_mode=''");
+			}
 		}
 
 		if (!@mysql_select_db($database)) {
