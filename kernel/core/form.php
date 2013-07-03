@@ -16,7 +16,7 @@ class Form {
 
 		printf("<form %s>", self::create_attributes(array_merge($default_attributes, $attributes)));
 	}
-	
+
 	public static function input($name, $value = "", $attributes = array()) {
 		$attributes = array_merge(array(
 			'type' => 'text',
@@ -31,7 +31,7 @@ class Form {
 		$default_attributes['type'] = 'hidden';
 
 		self::input($name, $value, array_merge($default_attributes, $attributes));
-	}	
+	}
 
 	public static function password($name, $value = "", $attributes = array()) {
 		$default_attributes['type'] = 'password';
@@ -100,4 +100,3 @@ class Form {
 	}
 
 }
-?>

@@ -2,13 +2,13 @@
 if (defined('IN_APP') === false) exit('Access Dead');
 
 class Request {
-	
+
 	public static function get($key, $default = "") {
 		return self::read_from($_GET, $key, $default);
 	}
 
 	public static function post($key, $default = "") {
-		return self::read_from($_POST, $key, $default);	
+		return self::read_from($_POST, $key, $default);
 	}
 
 	public static function cookie($key, $default = "") {
@@ -42,7 +42,7 @@ class Request {
 	public static function is_post() {
 		return strtoupper($_SERVER['REQUEST_METHOD']) == 'POST';
 	}
-	
+
 	public static function is_get() {
 		return strtoupper($_SERVER['REQUEST_METHOD']) == 'GET';
 	}
@@ -52,4 +52,3 @@ class Request {
 	}
 
 }
-?>

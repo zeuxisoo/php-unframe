@@ -25,7 +25,7 @@ class Router {
 
 	public function run($controller, $action = "", $id = "") {
 		$controller = $controller."_Controller";
-		
+
 		if (class_exists($controller) === true) {
 			$instance = new $controller();
 			$instance->params = Route::params();
@@ -57,4 +57,3 @@ class Router {
 		exit($message);
 	}
 }
-?>

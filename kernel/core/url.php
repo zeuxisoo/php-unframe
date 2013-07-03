@@ -2,7 +2,7 @@
 if (defined('IN_APP') === false) exit('Access Dead');
 
 class Url {
-	
+
 	public static function php_self() {
 		$php_self[] = isset($_SERVER['PHP_SELF']) === true ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME'];
 
@@ -44,4 +44,3 @@ class Url {
 	}
 
 }
-?>

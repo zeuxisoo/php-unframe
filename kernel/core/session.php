@@ -2,7 +2,7 @@
 if (defined('IN_APP') === false) exit('Access Dead');
 
 class Session {
-	
+
 	private static $instance = null;
 
 	public static function init() {
@@ -27,4 +27,3 @@ class Session {
 	}
 
 }
-?>

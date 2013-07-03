@@ -27,7 +27,7 @@ class Image {
 	public function file_extension($file_name) {
 		return strtolower(trim(substr(strrchr($file_name, '.'), 1)));
 	}
-	
+
 	public function single_resize($image_path, $width, $height) {
 		$current_image = $this->image_size($image_path);
 
@@ -50,18 +50,18 @@ class Image {
 			$resized_image = imagecreatetruecolor($new_width, $new_height);
 			$background = imagecolorallocate($resized_image, 255, 255, 255);
 			imagefill($resized_image, 0, 0, $background);
-			
+
 			$source_image = $this->create_source_image($image_path);
-			
+
 			imagecopyresampled($resized_image, $source_image, 0, 0, 0, 0, $new_width, $new_height, $current_image['width'], $current_image['height']);
 
 			$save_path = $this->create_save_path($image_path);
 
 			$this->create_image($resized_image, $file_extension, $save_path);
-			
+
 			imagedestroy($resized_image);
 			imagedestroy($source_image);
-			
+
 			return $this->status(self::IS_RESIZE, $image_path, $save_path);
 		}else{
 			return false;
@@ -202,4 +202,3 @@ class Image {
 	}
 
 }
-?>

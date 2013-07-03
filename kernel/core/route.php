@@ -72,4 +72,3 @@ class Route {
 		return isset($matches[2]) === true ? '('.$matches[2].')' : '([a-zA-Z0-9_\+\-%]+)';
 	}
 }
-?>

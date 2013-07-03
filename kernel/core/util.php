@@ -2,7 +2,7 @@
 if (defined('IN_APP') === false) exit('Access Dead');
 
 class Util {
-	
+
 	public static function end_with($haystack, $needle, $case=true) {
 		if ($case) {
 			return (strcmp(substr($haystack, strlen($haystack) - strlen($needle)),$needle)===0);
@@ -13,7 +13,7 @@ class Util {
 	public static function string_length_by_utf8($string) {
 		return count(preg_split("//u", $string)) - 2;
  	}
- 
+
 	public static function substring_by_utf8($text, $start, $limit, $encode = 'UTF-8') {
 		if (function_exists("mb_substri")) {
 			return mb_substr($text, $start, $limit, $encode);
@@ -76,7 +76,7 @@ class Util {
 
 	public static function size_format($size) {
 		$sizes = array(" Bytes", " KB", " MB", " GB", " TB", " PB", " EB", " ZB", " YB");
-		
+
 		if ($size == 0) {
 			return 0;
 		}
@@ -84,4 +84,3 @@ class Util {
 		return (round($size / pow(1024, ($i = floor(log($size, 1024)))), $i > 1 ? 2 : 0) . $sizes[$i]);
 	}
 }
-?>

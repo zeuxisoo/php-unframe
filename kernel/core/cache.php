@@ -33,4 +33,3 @@ class Cache {
 		return self::$adapter->clear();
 	}
 }
-?>

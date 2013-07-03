@@ -5,4 +5,3 @@ Language::init(array(
 	'language_root' => LANGUAGE_ROOT,
 	'language_name' => $config['init']['language']
 ));
-?>

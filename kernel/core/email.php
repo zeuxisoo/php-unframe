@@ -8,7 +8,7 @@ class Email {
 	public static function init($settings) {
 		self::$settings = $settings;
 	}
-	
+
 	public static function valid($email) {
 		return strlen($email) > 6 && preg_match("/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/", $email);
 	}
@@ -56,4 +56,3 @@ class Email {
 	}
 
 }
-?>

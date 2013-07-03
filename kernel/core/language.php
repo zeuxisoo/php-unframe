@@ -13,7 +13,7 @@ class Language {
 	private static $language_name_root= "";
 	private static $access_string 	= "IN_APP";
 	private static $cache_file_path = "";
-	
+
 	public static function init($settings) {
 		self::$language_root 		= $settings['language_root'];
 		self::$language_name 		= $settings['language_name'];
@@ -148,9 +148,9 @@ class Language {
 			}
 
 			$format = substr_replace(
-				$format, 
+				$format,
 				$replace = $argument_numbers[$argument_key] . ($auto_string === true ? '$s' : '$'),
-				$argument_position, 
+				$argument_position,
 				$argument_length
 			);
 
@@ -160,4 +160,3 @@ class Language {
 		return vsprintf($format, array_values($arguments));
 	}
 }
-?>

@@ -50,4 +50,3 @@ $config = array(
 		'from_username'	=> 'uMailer',
 	),
 );
-?>

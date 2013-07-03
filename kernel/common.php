@@ -19,7 +19,7 @@ function auto_load($class_name) {
 
 		while (sizeof($directories)) {
 			$directory = array_pop($directories);
-			
+
 			foreach(glob($directory."/*") as $file_path) {
 				if (is_dir($file_path) === true) {
 					array_push($directories, $file_path);
@@ -31,7 +31,7 @@ function auto_load($class_name) {
 	}
 }
 
-function import($path_string = ""){ 
+function import($path_string = ""){
 	$import_path = WWW_ROOT.'/'.str_replace(".", "/", $path_string);
 
 	if(substr($import_path,-1) != "*") {
@@ -64,4 +64,3 @@ function p() {
 function t() {
 	return call_user_func_array(array("Language", "translate"), func_get_args());
 }
-?>

@@ -7,4 +7,3 @@ View::init(array(
 	"view_cache_folder" => CACHE_ROOT."/view",
 	"theme" => $config['init']['default_view_theme'],
 ));
-?>

@@ -2,7 +2,7 @@
 if (defined('IN_APP') === false) exit('Access Dead');
 
 class Paginate {
-	
+
 	private static $row_count	= 0;
 	private static $page_number	= 1;
 	private static $per_page	= 18;
@@ -22,7 +22,7 @@ class Paginate {
 	public static function offset() {
 		self::prepare();
 		self::calculate();
-		
+
 		return self::$offset;
 	}
 
@@ -44,7 +44,7 @@ class Paginate {
 
 	private function calculate() {
 		self::$have_page = ceil(self::$row_count / self::$per_page);
-		
+
 		if (self::$have_page <= 0) {
 			self::$have_page = 1;
 		}
@@ -101,7 +101,7 @@ class Paginate {
 			$min = $min > 1 ? $min : 1;
 			$range = range($min, $max);
 		}
-		
+
 		include_once View::render("paginate/".$view_name.".html");
 	}
 
@@ -111,4 +111,3 @@ class Paginate {
 		return self::$script.'?'.http_build_query($query_string_array);
 	}
 }
-?>

@@ -17,4 +17,3 @@ class Benchmark {
 		return round(((double) $time_parts[1].substr($time_parts[0], 1)) - $start_time,6);
 	}
 }
-?>

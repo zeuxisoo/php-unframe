@@ -185,4 +185,3 @@ class MySQL_Adapter extends Database_Adapter {
 	}
 
 }
-?>

@@ -198,4 +198,3 @@ class SQLite_Adapter extends Database_Adapter {
 	}
 
 }
-?>

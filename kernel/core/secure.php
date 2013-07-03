@@ -34,7 +34,7 @@ class Secure {
 			if (empty($csrf_encrypt_key) === false) {
 				return hash_hmac('md5', $text, $csrf_encrypt_key);
 			}else{
-				return hash_hmac('md5', $text, self::$csrf_encrypt_key);	
+				return hash_hmac('md5', $text, self::$csrf_encrypt_key);
 			}
 		}
 	}
@@ -45,7 +45,7 @@ class Secure {
 		$k = Session::set(sprintf("%s::%s::csrf_token", __class__, $url), $j);
 		return substr(self::encrypt_text($i.$j), -22, 12);
 	}
-	
+
 	public static function validate_csrf_token($token, $url = '') {
 		$i = ceil(time() / self::$csrf_token_ttl);
 		$j = Session::get(sprintf("%s::%s::csrf_token", __class__, $url), true);
@@ -61,4 +61,3 @@ class Secure {
 		exit(sprintf("<strong>[Error]:</strong> %s", $message));
 	}
 }
-?>

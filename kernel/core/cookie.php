@@ -2,7 +2,7 @@
 if (defined('IN_APP') === false) exit('Access Dead');
 
 class Cookie {
-	
+
 	public static function get($name) {
 		return Request::cookie($name);
 	}
@@ -20,4 +20,3 @@ class Cookie {
 	}
 
 }
-?>

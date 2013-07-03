@@ -90,4 +90,3 @@ class File_Adapter extends Cache_Adapter {
 	}
 
 }
-?>

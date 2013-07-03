@@ -24,7 +24,7 @@ class Plugin {
 				require_once $file_path;
 			}else{
 				foreach(glob($file_path.'/*') as $plugin_file_path) {
-					require_once $plugin_file_path;	
+					require_once $plugin_file_path;
 				}
 			}
 		}
@@ -204,4 +204,3 @@ class Plugin {
 		}
 	}
 }
-?>

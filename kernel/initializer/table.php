@@ -6,4 +6,3 @@ if ($config['init']['use_database'] === true) {
 		'db' => Database::instance()
 	));
 }
-?>

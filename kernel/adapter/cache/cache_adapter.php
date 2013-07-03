@@ -10,4 +10,3 @@ abstract class Cache_Adapter {
 	abstract public function clear($name = "");		// Clean database
 
 }
-?>

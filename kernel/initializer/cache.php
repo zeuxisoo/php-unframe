@@ -6,4 +6,3 @@ Cache::init(array(
 		'cache_root' => CACHE_ROOT.'/file_adapter'
 	))
 ));
-?>

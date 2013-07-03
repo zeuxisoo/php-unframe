@@ -15,4 +15,3 @@ $lang = array(
 	'Overwrite disabled and file exists' => '檔案己存在 (自動覆寫目前為關閉)',
 	'Upload single file success' => '上載單一檔案完成',
 );
-?>

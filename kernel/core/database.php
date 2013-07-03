@@ -2,7 +2,7 @@
 if (defined('IN_APP') === false) exit('Access Dead');
 
 class Database {
-	
+
 	const CONFIG_IS_EMPTY		= -1;
 	const NOT_FOUND_ADAPTER		= -2;
 	const DATABASE_NAME_IS_EMPTY= -3;
@@ -47,9 +47,8 @@ class Database {
 				$message = "Database name can not empty";
 				break;
 		}
-		
+
 		exit(sprintf("<p>[Database Core] %s</p>", $message));
 	}
 
 }
-?>

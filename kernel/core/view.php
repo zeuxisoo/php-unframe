@@ -72,7 +72,7 @@ class View {
 				self::error(self::FILE_NOT_FOUND);
 			}
 		}
-	
+
 		// If not expired not render again
 		if (file_exists(self::$view_file_cached_path) && (filemtime(self::$view_file_path) <= filemtime(self::$view_file_cached_path))) {
 			return true;
@@ -184,4 +184,3 @@ class View {
 		echo "<strong>",$message,": </strong>",$view_file_path,"<br />";
 	}
 }
-?>

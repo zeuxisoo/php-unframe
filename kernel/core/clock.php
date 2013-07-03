@@ -46,12 +46,12 @@ class Clock {
 			$i = ceil(($limit % 3600) / 60);
 			$timestamp = t("%{hour} hour %{minute} minute ago", array('hour' => $h, 'minute' => $i));
 		}
-       
+
 		if ($limit >= 3600 * 24 && $limit < 3600 * 24 * 30) {
 			$d = floor($limit / (3600*24));
 			$timestamp = t("%{day} day ago", array('day' => $d));
 		}
-		
+
 		if ($limit >= 3600 * 24 * 30) {
 			$timestamp = self::to_date_time($timestamp, $out_range_date_format);
 		}
@@ -59,4 +59,3 @@ class Clock {
 		return $timestamp;
 	}
 }
-?>

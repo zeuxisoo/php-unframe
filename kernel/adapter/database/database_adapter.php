@@ -3,7 +3,7 @@ if (defined('IN_APP') === false) exit('Access Dead');
 
 abstract class Database_Adapter {
 	public $prefix = "";
-	
+
 	abstract public function connect($host, $username, $password, $database, $prefix, $charset, $port);
 	abstract public function query($sql, $type = '');
 	abstract public function update($sql, $type = '');
@@ -25,7 +25,7 @@ abstract class Database_Adapter {
 	abstract public function fetch_one($sql, $type = '');
 	abstract public function fetch_all($sql, $type = '');
 
-	// 
+	//
 	protected function halt($message, $sql = '') {
 		$time = Clock::to_date_time(time(), "Y-m-d H:i:s (D)");
 		$driver = __CLASS__;
@@ -41,4 +41,3 @@ abstract class Database_Adapter {
 	}
 
 }
-?>
