@@ -1,33 +1,6 @@
 # unFrame
 
-a micro unframe for PHP 5 under The BSD 2-Clause License.
-
-License
--------
-English: http://www.opensource.org/licenses/bsd-license.php
-
-Chinese: http://zh.wikipedia.org/wiki/BSD_licenses
-
-	Copyright (c) 2012 著作權由 Zeuxis Lo 所有。著作權人保留一切權利。
-    
-    這份授權條款，在使用者符合以下二條件的情形下，授予使用者使用及再散播本
-    套裝軟體原始碼及二進位可執行形式的權利，無論此包裝是否經改作皆然：
-    
-    * 對於本軟體原始程式碼的再散播，必須保留上述的版權宣告、此二條件表列，以
-      及下述的免責聲明。
-    * 對於本套件二進位可執行形式的再散播，必須連帶以檔案以及／或者其他附
-      於散播包裝中的媒介方式，重制上述之版權宣告、此二條件表列，以及下述
-      的免責聲明。
-    
-    免責聲明：本軟體是由著作權人及本軟體之貢獻者以現狀（"as is"）提供，
-    本套裝軟體包裝不負任何明示或默示之擔保責任，包括但不限於就適售性以及
-    特定目的的適用性為默示性擔保。著作權人及本軟體之貢獻者，無論任何條件、
-    無論成因或任何責任主義、無論此責任為因合約關係、無過失責任主義或因非
-    違約之侵權（包括過失或其他原因等）而起，對於任何因使用本套裝軟體裝所
-    產生的任何直接性、間接性、偶發性、特殊性、懲罰性或任何結果的損害（
-    包括但不限於替代商品或勞務之購用、使用損失、資料損失、利益損失、業務
-    中斷等等），不負任何責任，即在該種使用已獲事前告知可能會造成此類損害
-    的情形下亦然。
+a micro unframe for PHP 5.2 environment under The BSD 2-Clause License.
 
 Start
 ------
@@ -123,7 +96,7 @@ Delete
 ### Cookie
 
 	Cookie::get("name");
-	Cookie::set("name", "zeuxis");
+	Cookie::set("name", "username");
 	Cookie::remove("name");
 
 ### Database
@@ -193,10 +166,10 @@ Form::select && Form::select
 
 Form::checkbox
 
-	Form::checkbox("Name", "Zeuxis", false); echo " Zeuxis";
+	Form::checkbox("Name", "username", false); echo " username";
 	Form::checkbox("Name", "Noell", true); echo " Noell";
 
-	<input type="checkbox" name="Name" value="Zeuxis" />
+	<input type="checkbox" name="Name" value="username" />
 	<input type="checkbox" name="Name" value="Noell" checked="checked" />
 
 Form::textarea
@@ -278,15 +251,15 @@ Upload single file, resize image and crop image
 
 ### Language
 
-	Language::translate("Name: %s, Age: %s", "Zeuxis", 18);
+	Language::translate("Name: %s, Age: %s", "username", 18);
 
-Name: Zeuxis, Age: 18
+Name: username, Age: 18
 
-	Language::translate("Name: %{name}, Age: %{age}", array("name" => "Zeuxis", "age" => 18));
+	Language::translate("Name: %{name}, Age: %{age}", array("name" => "username", "age" => 18));
 
-Name: Zeuxis, Age: 18.00
+Name: username, Age: 18.00
 
-	Language::translate("Name: %{name}s, Age: %{age}0.2f", array("name" => "Zeuxis", "age" => 18), false);
+	Language::translate("Name: %{name}s, Age: %{age}0.2f", array("name" => "username", "age" => 18), false);
 
 ### Paginate
 
@@ -370,9 +343,9 @@ Using closure function show the content *PHP 5.3*
 		echo $id.' - '.$name;
 	});
 
-Use custom regex rule like preg_match("/Zeuxis/", xx);
+Use custom regex rule like preg_match("/username/", xx);
 
-	Route::map("/user/:id/:name#Zeuxis#", function($id, $name) {
+	Route::map("/user/:id/:name#username#", function($id, $name) {
 		echo $id.' - '.$name;
 	});
 
