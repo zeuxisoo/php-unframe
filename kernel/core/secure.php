@@ -21,7 +21,7 @@ class Secure {
 					$string[$key] = self::add_slash($val, $force, $strip);
 				}
 			} else {
-				$string = addslashes($strip === true ? stripslashes($string) : $string);
+				$string = $strip === true ? stripslashes($string) : addslashes($string);
 			}
 		}
 		return $string;
