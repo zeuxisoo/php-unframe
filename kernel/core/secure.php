@@ -27,6 +27,10 @@ class Secure {
 		return $string;
 	}
 
+	public static function remove_slash($string) {
+    	return self::add_slash($string, true, true);
+	}
+
 	public static function encrypt_text($text, $csrf_encrypt_key = '') {
 		if (empty($csrf_encrypt_key) === true && empty(self::$csrf_encrypt_key) === true) {
 			self::error(self::NOT_SET_CSRF_ENCRYPT_KEY);
